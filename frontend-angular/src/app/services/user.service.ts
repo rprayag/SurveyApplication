@@ -1,7 +1,7 @@
-import {HttpHeaders, HttpClient } from '@angular/common/http';
+import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { identifierModuleUrl } from '@angular/compiler';
-import {map} from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 export const TOKEN = 'token';
 export const AUTHENTICATED_USER = 'authenticaterUser';
@@ -12,11 +12,11 @@ export const AUTHENTICATED_USER = 'authenticaterUser';
 export class UserService {
 
 
-  role:string;
-  
+  role: string;
+
 
   url = "http://localhost:8080/";
-  
+
   constructor(private http: HttpClient) { }
 
   executeAuthenticationService(email, password) {
@@ -39,16 +39,16 @@ export class UserService {
       Authorization: basicAuthHeaderString
     })
 
-    
+
 
     return this.http.get(
       `${this.url}/login/${email}/${password}`,
-       {responseType: 'text'}).pipe(
+      { responseType: 'text' }).pipe(
         map(
           data => {
             console.log("@@@@@@@@@@@@@@@@@@@@@@@");
             console.log(data)
-            this.role=data;
+            this.role = data;
             sessionStorage.setItem("authenticatedUser", email);
             sessionStorage.setItem("userRole", data);
             sessionStorage.setItem(TOKEN, basicAuthHeaderString);
@@ -62,14 +62,14 @@ export class UserService {
 
 
 
-  createUser(user){
+  createUser(user) {
     console.log(user);
-    
-   return this.http.post(
-              `${this.url}createNewUser`
-                , user);
 
-   }
+    return this.http.post(
+      `${this.url}createNewUser`
+      , user);
+
+  }
   isUserLoggedIn() {
     let email = sessionStorage.getItem("authenticatedUser");
     return !(email === null);
@@ -78,27 +78,23 @@ export class UserService {
   isAdmin() {
     let admin = sessionStorage.getItem("userRole");
     console.log(admin);
-    
-    if(admin==="admin")
-    return true;
+
+    if (admin === "admin")
+      return true;
     else
-    return false;
+      return false;
   }
 
 
-  getEmail()
-  {
+  getEmail() {
     return sessionStorage.getItem("authenticatedUser")
   }
-
-  
-  
-
-  
 
   logout() {
     sessionStorage.removeItem('authenticatedUser')
   }
 
   
+
+
 }
