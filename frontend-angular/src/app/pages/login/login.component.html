@@ -1,0 +1,33 @@
+<div class="wrapper">
+
+    <br>
+    <div class="alert alert-warning" *ngIf='invalidLogin'>{{errorMessage}}</div>
+
+    <form id="formContent" (ngSubmit)="!loginForm.invalid && handleLogin2() " #loginForm="ngForm">
+        <h3>Login</h3>
+        <label>Email ID:</label>
+        <br>
+        <input id="email" type="email" name="email" autofocus [(ngModel)]="email" required="required" />
+        <br>
+        <label>Password:</label>
+        <input id="password" type="password" name="password" [(ngModel)]="password" required="required" />
+        <br>
+        <input type="submit" id="login" [disabled]="!loginForm.valid" value="LOGIN" />
+        <div id="formFooter">
+            New User? <a routerLink="/register">register
+                here</a>
+
+            <div> <strong>Sample Users</strong>
+                <table style="width: 100%;" id="sampleLoginTable">
+                    <tr>
+                        <td><a (click)="fillLoginFields('admin1@gmail.com','123')" href="javascript:void(0)">admin1</a></td>
+                        <td><a (click)="fillLoginFields('user1@gmail.com','123')" href="javascript:void(0)">user1</a></td>
+                    </tr>
+                </table>
+            </div>
+
+        </div>
+    </form>
+
+
+</div>

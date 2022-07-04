@@ -1,0 +1,62 @@
+<div class="blue">
+    <div class="text-center">
+        <br><br>
+        <h1>ADD ADMIN</h1>
+        <div>
+            <form [formGroup]="registerForm" #rForm="ngForm" (ngSubmit)="onSubmit()">
+
+                <div>
+
+                    <mat-form-field appearance="outline" style="width:400px ">
+                        <mat-label>First Name</mat-label>
+                        <input matInput placeholder="Enter First Name" autofocus formControlName="firstName">
+                        <mat-error>Required</mat-error>
+                    </mat-form-field>
+
+
+
+                </div>
+
+                <div>
+                    <mat-form-field appearance="outline" style="width:400px ">
+                        <mat-label>Last Name</mat-label>
+                        <input matInput placeholder="Enter Last Name" formControlName="lastName">
+                        <mat-error>Required</mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div>
+                    <mat-form-field appearance="outline" style="width:400px ">
+                        <mat-label>Email</mat-label>
+                        <input matInput placeholder="Enter email " formControlName="email">
+                        <mat-error>Enter valid email</mat-error>
+                    </mat-form-field>
+
+
+                </div>
+
+
+                <div>
+
+                    <mat-form-field appearance="outline" style="width:400px ">
+                        <mat-label>Password</mat-label>
+                        <input matInput placeholder="Enter Password" formControlName="password">
+                        <mat-error>Required</mat-error>
+                    </mat-form-field>
+
+                </div>
+
+
+                <div class="text-center">
+                    <button class="btn btn-primary mr-1">ADD ADMIN</button>
+                    <!-- <button class="btn btn-secondary" type="reset" (click)="onReset()">Cancel</button> -->
+                </div>
+
+
+
+
+            </form>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,115 @@
+<div class="blue">
+    <div class="container">
+        <form [formGroup]="fg" *ngIf="fg" #tForm="ngForm">
+            <br>
+            <div class="card">
+                <div class="card-body">
+                    <div>
+                        <h1> {{survey.surveyName}}</h1>
+                    </div>
+                    <hr>
+                    <div>
+                        <h3>Description:&nbsp;{{survey.description}}</h3>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="container" *ngFor="let question of survey.questions;let i=index">
+                <br>
+
+                <div class="card">
+                    <div class="card-body" *ngIf='question.questionType==="text"'>
+                        <div>
+                            <h3>
+                                {{i+1 }}.{{question.questionText}} &nbsp;&nbsp;&nbsp;
+                            </h3>
+
+                        </div>
+
+                        <mat-form-field appearance="outline" style="width:600px ">
+                            <mat-label>Please Enter Answer<sup *ngIf="question.required" style="color:red ;text-decoration-style: solid;">*</sup></mat-label>
+                            <input matInput placeholder="Enter answer" [formControlName]="question.questionText">
+                        </mat-form-field>
+
+
+                    </div>
+                </div>
+
+
+
+                <div class="card">
+                    <div class="card-body" *ngIf='question.questionType==="textarea"'>
+                        <div>
+                            <h3>
+                                {{i+1 }}.{{question.questionText}}
+                            </h3>
+                        </div>
+
+                        <mat-form-field appearance="outline" style="width:600px">
+                            <mat-label>Please Enter Answer<sup *ngIf="question.required" style="color:red ;text-decoration-style: solid;">*</sup></mat-label>
+                            <textarea matInput [formControlName]="question.questionText"></textarea>
+                        </mat-form-field>
+                    </div>
+                </div>
+
+
+                <div class="card">
+                    <div class="card-body" *ngIf='question.questionType==="radiobutton"'>
+                        <div>
+                            <h3>
+                                {{i+1 }}.{{question.questionText}} &nbsp;&nbsp;<sup *ngIf="question.required" style="color:red ;text-decoration-style: solid;">*</sup>
+                            </h3>
+                        </div>
+
+                        <!-- <mat-list-item checked *ngFor="let option of question.options;let i=index ">
+                            <mat-radio-button [value]="option" [formControlName]="question.questionText" class="list-inline"> {{option}}
+                            </mat-radio-button>
+                        </mat-list-item> -->
+                        <mat-radio-group [formControlName]="question.questionText">
+                            <li *ngFor="let option of question.options;let i=index" style="list-style:none">
+                                <mat-radio-button [value]="option">
+                                    {{option}}
+                                </mat-radio-button>
+                            </li>
+                        </mat-radio-group>
+
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-body" *ngIf='question.questionType==="checkbox"'>
+                        <div>
+                            <h3>
+                                {{i+1 }}.{{question.questionText}}&nbsp;&nbsp;
+                            </h3>
+                        </div>
+
+                        <!-- //  <div *ngFor="let option of question.options"> -->
+                        <!-- <mat-checkbox [value]=option [formControlName]="question.questionText" class="example-margin">
+                                {{option}} &nbsp; &nbsp; &nbsp; &nbsp;
+                            </mat-checkbox> -->
+                        <li *ngFor="let option of question.options;let i=index" style="list-style:none">
+                            <mat-checkbox (change)="onClicked($event,option,question?.id)" [value]="option" [formArrayName]="question.questionText">
+                                {{option}}
+                            </mat-checkbox>
+                        </li>
+                        <!-- //</div> -->
+
+
+
+
+                    </div>
+                </div>
+            </div>
+            <div class="card-body ">
+                <button type="submit " (click)="onSubmit() " class="btn btn-success " autofocus [disabled]="!tForm.valid">Submit</button>
+            </div>
+            <div>
+
+
+            </div>
+
+        </form>
+    </div>
+</div>

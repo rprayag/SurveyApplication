@@ -1,0 +1,33 @@
+<div class="grey">
+    <div class="container">
+        <br>
+        <div class="card">
+            <div class="card-body">
+                <h1> Surveys </h1>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Survey Name</th>
+                            <th>No. of Questions</th>
+                            <th>Valid Till</th>
+                            <th>Link</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let survey of surveys;let i = index">
+                            <td>{{i+1}}</td>
+                            <td>{{survey.surveyName}}</td>
+                            <td>{{survey.noq}}</td>
+                            <td>{{survey.endDate| date | uppercase}}</td>
+                            <td>
+                                <a href="takeSurvey/{{survey.id}}">Take Survey</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <br>
+    </div>
+</div>

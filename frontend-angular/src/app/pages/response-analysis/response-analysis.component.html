@@ -1,0 +1,81 @@
+<div>
+    <div class="card blue">
+        <div class="card-body">
+            <h2>{{surveyName}}</h2><span> <a (click)="export()"
+            style="cursor: pointer;color: rebeccapurple; float: right;">Export
+            <mat-icon> cloud_download</mat-icon>
+        </a></span>
+            <h3>Total number of responses recieved: {{surveyResponses.length}}</h3>
+
+
+            <mat-form-field appearance="outline" style="width:300px ">
+                <mat-label>Search
+                </mat-label>
+                <input matInput [(ngModel)]="searchText" placeholder="Enter" autofocus>
+                <mat-icon matSuffix>search</mat-icon>
+            </mat-form-field>
+            &nbsp;&nbsp;&nbsp;
+            <span>
+        <mat-form-field appearance="outline" style="width:100px ">
+            <mat-label>From</mat-label>
+            <input matInput [matDatepicker]="picker" >
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker touchUi #picker></mat-datepicker>
+        </mat-form-field>
+    </span> &nbsp;&nbsp;&nbsp;
+            <span>
+        <mat-form-field appearance="outline" style="width:100px ">
+            <mat-label>Till</mat-label>
+            <input matInput [matDatepicker]="picker" >
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker touchUi #picker></mat-datepicker>
+        </mat-form-field>
+    </span>
+        </div>
+    </div>
+    <br>
+
+
+
+
+
+
+
+    <div class="container">
+
+
+    </div>
+    <div class="card blue">
+        <div class="card-body">
+            <h3>Responses</h3>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>User</th>
+                        <th>Answer</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngIf="surveyResponses.length==0">
+                        <h3>No Responses Yet</h3>
+                    </tr>
+                    <tr *ngFor="let response of surveyResponses| responseFilter: searchText;index as i ">
+                        <td>{{i+1}}</td>
+                        <td>{{response.user}}</td>
+                        <td><button mat-raised-button color="primary" (click)="viewAnswers(i)">View
+                        </button></td>
+                        <!-- <td>
+                        <div *ngFor="let ans of response.answers">
+                            {{ans|json}}
+                        </div>
+                    </td> -->
+
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>

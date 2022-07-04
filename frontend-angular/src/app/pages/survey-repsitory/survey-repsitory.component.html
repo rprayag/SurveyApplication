@@ -1,0 +1,109 @@
+<div class="blue">
+    <div class="container">
+        <br>
+        <div class="card">
+            <div class="card-body">
+                <h2>Drafts</h2>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Survye Name</th>
+                            <th>No. of questions</th>
+                            <th>End Date</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngIf="draftSurveys.length==0">
+                            <h3>No survey present in draft</h3>
+                        </tr>
+                        <tr *ngFor="let survey of draftSurveys;index as i ">
+                            <td>{{i+1}}</td>
+                            <td>{{survey.surveyName}}</td>
+                            <td>{{survey.noq}}</td>
+                            <td>{{survey.endDate | date | uppercase}}</td>
+                            <td>
+                                <button mat-raised-button color="primary" (click)="publishSurvey(survey.id)">Publish
+                            it!</button>&nbsp;
+                                <button mat-raised-button color="accent">Edit</button>&nbsp;
+                                <button mat-raised-button color="warn">X</button>&nbsp;
+
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <br>
+        <div class="card">
+            <div class="card-body">
+                <h2>Published Surveys</h2>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Survye Name</th>
+                            <th>No. of questions</th>
+                            <th>End Date</th>
+                            <th>Broadcast Link</th>
+                            <th>Action</th>
+
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngIf="publishedSurveys.length==0">
+                            <h3>Currently No survey is Published</h3>
+                        </tr>
+                        <tr *ngFor="let survey of publishedSurveys;index as i ">
+                            <td>{{i+1}}</td>
+                            <td>{{survey.surveyName}}</td>
+                            <td>{{survey.noq}}</td>
+                            <td>{{survey.endDate | date | uppercase}}</td>
+                            <td>{{survey.link}}</td>
+                            <td>
+                                <button mat-raised-button color="primary" (click)="closeSurvey(survey.id)">Close</button>
+                            </td>
+
+
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <br>
+
+        <div class=" card ">
+            <div class="card-body ">
+                <h2>Expired Surveys| Closed Surveys</h2>
+                <table class="table ">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Survye Name</th>
+                            <th>No. of questions</th>
+                            <th>Closed | Expired</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngIf="expiredSurveys.length==0 ">
+                            <h3>Currently No survey is Expired</h3>
+                        </tr>
+                        <tr *ngFor="let survey of expiredSurveys;index as i ">
+                            <td>{{i+1}}</td>
+                            <td>{{survey.surveyName}}</td>
+                            <td>{{survey.noq}}</td>
+                            <td> {{survey.endDate | date | uppercase}}</td>
+
+
+                        </tr>
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+
+    </div>
+</div>

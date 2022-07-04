@@ -1,0 +1,43 @@
+<div class="blue">
+    <div class="container">
+        <br>
+        <div class="card">
+            <div class="card-body">
+                <h2>SurveyResponses</h2>
+                <table class="table" id="tableID">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Survye Name</th>
+                            <th>End Date</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngIf="survey.length==0">
+                            <h3>No survey present in draft</h3>
+                        </tr>
+                        <tr *ngFor="let survey of survey;index as i ">
+                            <td>{{i+1}}</td>
+                            <td>{{survey.surveyName}}</td>
+                            <td>{{survey.endDate | date | uppercase}}</td>
+                            <td>
+                                <button mat-raised-button color="primary" (click)="surveyResponseDetails(survey.id)">Analyze
+                            </button>&nbsp;
+                                <a style="cursor: pointer;color: rebeccapurple;" (click)="export()">
+                                    <mat-icon> cloud_download</mat-icon>
+                                </a>
+                                &nbsp;
+                                <!-- <button mat-raised-button color="accent">Edit</button>&nbsp;
+                                <button mat-raised-button color="warn">X</button>&nbsp; -->
+
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <br>
+
+    </div>
+</div>

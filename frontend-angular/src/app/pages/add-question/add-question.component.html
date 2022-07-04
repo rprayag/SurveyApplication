@@ -1,0 +1,80 @@
+<mat-dialog-content [formGroup]="fg" #qForm="ngForm">
+
+    <div>
+        <mat-form-field appearance="outline" style="width:600px ">
+            <mat-label>Question</mat-label>
+            <input matInput formControlName="questionText" placeholder="Add Your Question ?" required>
+        </mat-form-field>
+    </div>
+
+    <div>
+        <mat-checkbox formControlName="required">Is it mandatory ?</mat-checkbox>
+    </div>
+
+    <div>
+        <mat-form-field appearance="outline" style="width:600px ">
+            <mat-label>Select Response Type</mat-label>
+            <mat-select placeholder="Select" formControlName="questionType" [(value)]="selectedQuestionType" required>
+                <mat-option value="text">Single Line Text</mat-option>
+                <mat-option value="textarea">Multi Line Text</mat-option>
+                <mat-option value="radiobutton">Single Choice</mat-option>
+                <mat-option value="checkbox">Multi Choice</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div class="alert alert-warning" *ngIf='emptyOptions'>{{errorMessage}}</div>
+
+    <div *ngIf='selectedQuestionType=="checkbox"  || selectedQuestionType=="radiobutton"'>
+        <div>
+            <mat-form-field appearance="outline">
+                <mat-label>Add Options</mat-label>
+                <input matInput placeholder="Options" formControlName="option">
+
+            </mat-form-field>
+            &nbsp;&nbsp;&nbsp;
+            <span>
+                <button class="mat-raised-button mat-primary "
+                    (click)="!fg.controls.option.invalid && addOption() ">Add</button>
+            </span>
+        </div>
+
+
+
+        <div class="card">
+            <div class="card-body">
+
+                <h4>Your Options: {{optionList.length}}</h4>
+                <table class="table ">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Option</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="h-25" *ngFor="let item of optionList;index as i ">
+                            <td>{{i+1}}</td>
+                            <td>{{item}}</td>
+                            <td>
+
+                                <button mat-raised-button color="warn" (click)="removeOption(item)">
+                                    X
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+</mat-dialog-content>
+
+<div class="card-body">
+    <mat-dialog-actions>
+        <button class="mat-raised-button" (click)="close() ">Close</button>&nbsp;&nbsp;
+        <button class="mat-raised-button mat-primary " [disabled]="!qForm.valid" (click)="save() ">Save</button>
+    </mat-dialog-actions>
+</div>

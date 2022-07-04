@@ -1,0 +1,24 @@
+<div class="card">
+    <div class="card-body">
+        <h3></h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Question</th>
+                    <th>Answer</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let question of survey.questions;index as i ">
+                    <td>{{i+1}}</td>
+                    <td>{{question.questionText}}</td>
+                    <td>{{response.answers[i]}}</td>
+
+
+                </tr>
+            </tbody>
+        </table>
+
+    </div>

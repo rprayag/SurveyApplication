@@ -1,0 +1,78 @@
+<div class="blue">
+    <br>
+    <div class="container">
+        <div class="card">
+            <div class="card-body">
+                <h2>Create Survey</h2>
+                <form [formGroup]="surveyForm" #sForm="ngForm">
+                    <div>
+                        <mat-form-field appearance="outline" style="width:400px ">
+                            <mat-label>Survey Name</mat-label>
+                            <input matInput formControlName="surveyName" autofocus placeholder="Enter Survey Name">
+                            <mat-error>Required</mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <mat-form-field appearance="outline" style="width:700px ">
+                            <mat-label>Description</mat-label>
+                            <textarea matInput placeholder="Enter Description" formControlName="description"></textarea>
+                            <mat-error>Required</mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <mat-form-field appearance="outline" style="width:300px ">
+                            <mat-label>Choose a date when survey expires</mat-label>
+                            <input matInput [matDatepicker]="picker" [min]="today" formControlName="endDate">
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker touchUi #picker></mat-datepicker>
+                            <mat-error>Required</mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="alert alert-warning" *ngIf='emptyQuestion'>{{errorMessage}}</div>
+
+                    <fieldset>
+                        <div class="container">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Question</th>
+                                        <th>Question Type</th>
+                                        <th>Required</th>
+                                        <th>Options</th>
+
+
+
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let question of questionList;index as i ">
+                                        <td>{{i+1}}</td>
+                                        <td>{{question.questionText}}</td>
+                                        <td>{{question.questionType}}</td>
+                                        <td>{{question.required}}</td>
+                                        <td>{{question.options}}</td>
+
+
+                                    </tr>
+                                </tbody>
+
+                            </table>
+                        </div>
+
+                    </fieldset>
+
+                    <fieldset>
+                        <div>
+                            <button mat-raised-button color="primary" (click)="addQuestion()">Add Question</button>
+                        </div><br>
+                        <div>
+                            <button class="mat-raised-button mat-primary " (click)="onSubmit()" [disabled]="!sForm.valid">Submit</button>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
